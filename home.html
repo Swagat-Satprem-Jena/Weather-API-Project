@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Weather Api</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
+        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;700&display=swap" rel="stylesheet">
+    <!-- <link rel='stylesheet' type='text/css' media='screen' href='/home.css'> -->
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Quicksand', sans-serif;
+        }
+
+        .main-div {
+            height: 100vh;
+            width: 100vw;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #E0DECA;
+        }
+
+        .fit {
+            height: 50vh;
+            width: 20vw;
+            background: #ABC9FF;
+            border-radius: 0.5rem;
+            box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .anm {
+            height: 100%;
+            width: 100%;
+            background: none;
+            border-radius: 0.5rem;
+            position: absolute;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .wave {
+            height: 170%;
+            width: 170%;
+            background: #fff;
+            opacity: 0.3;
+            border-radius: 50%;
+            position: absolute;
+            /* margin-left: -25rem; */
+            /* margin-top: -15rem; */
+            top: 40%;
+            /* left: -70%; */
+            animation: rotation 3000ms infinite linear;
+        }
+
+        .wave.-second {
+            /* opacity: 0.2; */
+            animation: rotation 4000ms infinite linear;
+            transform: rotateZ(-45deg);
+        }
+
+        .wave.-third {
+            /* opacity: 0.2; */
+            animation: rotation 5000ms infinite linear;
+            transform: rotateZ(45deg);
+        }
+
+        .weather-icon-div {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50%;
+        }
+
+        .info-div {
+            height: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            position: relative;
+            z-index: 3;
+        }
+
+        .location {
+            font-weight: bold;
+        }
+
+        .current-temp {
+            font-weight: bold;
+        }
+
+        .date-time {
+            margin-bottom: 20px;
+            font-size: 0.6rem;
+            margin-top: 2px;
+            /* font-weight: 900; */
+            color: #EEEEEE;
+        }
+
+        .max-min-temp {
+            font-size: 0.6rem;
+            margin-top: 2px;
+            /* font-weight: 900; */
+            color: #EEEEEE;
+        }
+
+        .icn-anm {
+            margin-right: 20px;
+            animation: pendulum 2000ms infinite linear;
+        }
+
+        @keyframes pendulum {
+            0% {
+                transform: translateX(0px);
+            }
+
+            /* 25% {transform: translateX(10px);} */
+            50% {
+                transform: translateX(10px);
+            }
+
+            /* 75% {transform: translateX(-10px);} */
+            100% {
+                transform: translateX(0px);
+            }
+        }
+
+        @keyframes rotation {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(359deg);
+            }
+        }
+
+        @media only screen and (max-width: 991px) {
+            .fit {
+                width: 60vw;
+            }
+        }
+
+        @media only screen and (max-width: 600px) {
+            .fit {
+                width: 80vw;
+            }
+        }
+
+        /* @media only screen and (min-height: 852px) {
+    .wave {
+        top: 90%;
+        left: 50%;
+    }
+} */
+        /* 
+@media only screen and (min-height: 668px) {
+    .wave {
+        top: 90%;
+        left: 50%;
+    }
+} */
+    </style>
+
+
+</head>
+
+<body>
+
+    <div class="main-div">
+        <div class="fit">
+            <div class="anm">
+                <div class="wave -first"></div>
+                <div class="wave -second"></div>
+                <div class="wave -third"></div>
+            </div>
+
+            <div class="weather-icon-div">
+                <img src="{%icon_url%}" alt="weather-icon">
+            </div>
+            <div class="info-div">
+                <h4 class="location"><i class="fa-solid fa-street-view icn-anm"></i> {%location_city%},
+                    {%location_country%}</h3>
+                    <p class="date-time text-muted">WED | MAR 27 | 10:49 AM</p>
+                    <h4 class="current-temp">{%curr_temp%}&deg;C</h3>
+                        <p class="max-min-temp text-muted">Min {%min_temp%}&deg;C | Max {%max_temp%}&deg;C</p>
+            </div>
+
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- <script type="text/javascript" src="index.js"></script> -->
+
+    <script>
+        const weekday = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+        const monthArr = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        const date = new Date();
+        const day = weekday[date.getDay()];
+        const month = monthArr[date.getMonth()];
+        const month_date = date.getDate();
+        let hours = date.getHours();
+        let minutes = date.getMinutes();
+        let ampm = hours >= 12 ? 'pm' : 'am';
+        hours = hours % 12;
+        hours = hours ? hours : 12; // the hour '0' should be '12'
+        minutes = minutes < 10 ? '0' + minutes : minutes;
+        const strTime = hours + ':' + minutes + ' ' + ampm;
+        const date_time = document.querySelector('.date-time');
+        date_time.textContent = `${day} | ${month} ${month_date} | ${strTime}`;
+    </script>
+</body>
+
+</html>

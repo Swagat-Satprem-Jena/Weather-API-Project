@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Quicksand', sans-serif;
+}
+
+.main-div {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: #E0DECA;
+}
+
+.fit {
+    height: 50vh;
+    width: 20vw;
+    background: #ABC9FF;
+    border-radius: 0.5rem;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    position: relative;
+    overflow: hidden;
+}
+
+.anm{
+    height: 100%;
+    width: 100%;
+    background: none;
+    border-radius: 0.5rem;
+    position: absolute;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.wave {
+    height: 170%;
+    width: 170%;
+    background: #fff;
+    opacity: 0.3;
+    border-radius: 50%;
+    position: absolute;
+    /* margin-left: -25rem; */
+    /* margin-top: -15rem; */
+    top: 40%;
+    /* left: -70%; */
+    animation: rotation 3000ms infinite linear;
+}
+
+.wave.-second {
+    /* opacity: 0.2; */
+    animation: rotation 4000ms infinite linear;
+    transform: rotateZ(-45deg);
+}
+
+.wave.-third {
+    /* opacity: 0.2; */
+    animation: rotation 5000ms infinite linear;
+    transform: rotateZ(45deg);
+}
+
+.weather-icon-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50%;
+}
+
+.info-div{
+    height: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    z-index: 3;
+}
+
+.location{
+    font-weight: bold;
+}
+
+.current-temp{
+    font-weight: bold;
+}
+
+.date-time{
+    margin-bottom: 20px;
+    font-size: 0.6rem;
+    margin-top: 2px;
+    /* font-weight: 900; */
+    color: #EEEEEE;
+}
+
+.max-min-temp{
+    font-size: 0.6rem;
+    margin-top: 2px;
+    /* font-weight: 900; */
+    color: #EEEEEE;
+}
+
+.icn-anm{
+    margin-right: 20px;
+    animation: pendulum 2000ms infinite linear;
+}
+
+@keyframes pendulum {
+    0% {transform: translateX(0px);}
+    /* 25% {transform: translateX(10px);} */
+    50% {transform: translateX(10px);}
+    /* 75% {transform: translateX(-10px);} */
+    100% {transform: translateX(0px);}
+  }
+
+@keyframes rotation {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+@media only screen and (max-width: 991px) {
+    .fit {
+        width: 60vw;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .fit {
+        width: 80vw;
+    }
+}
+
+/* @media only screen and (min-height: 852px) {
+    .wave {
+        top: 90%;
+        left: 50%;
+    }
+} */
+/* 
+@media only screen and (min-height: 668px) {
+    .wave {
+        top: 90%;
+        left: 50%;
+    }
+} */
